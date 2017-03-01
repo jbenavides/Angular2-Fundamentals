@@ -19,11 +19,12 @@ import {
 import { EventsAppComponent } from './events-app.component'
 import { NavBarComponent } from './nav/navbar.component'
 import { Error404Component } from './errors/404.component'
-import { ToastrService } from './common/toastr.service'
+import { TOASTR_TOKEN, Toastr } from './common/toastr.service'
 import { CollpasibleWellComponent } from './common/collapsible-well.component'
 import { appRoutes } from './routes'
 import { AuthService } from './user/auth.service'
 
+declare let toastr: Toastr;
 
 @NgModule({
     imports: [
@@ -47,12 +48,15 @@ import { AuthService } from './user/auth.service'
     ],
     providers: [
         EventService,
-        ToastrService,
+        {
+            provide: TOASTR_TOKEN,
+            useValue: toastr
+        },
         EventRouteActivator,
         EventListResolver,
         AuthService,
         {
-            provide: 'canDeactivateCreateEvent', 
+            provide: 'canDeactivateCreateEvent',//this should be an OpaqueToken? no, in this case its ok, we want to use OpaqueToken for things like services that are actually injected into components and other services, but for something like this its ok to use the string.  
             useValue: checkDirtyState
         }
     ],

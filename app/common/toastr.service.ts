@@ -1,19 +1,10 @@
-import { Injectable } from '@angular/core'
+import { OpaqueToken } from '@angular/core'//OpaqueToken ->its job is simply to create a token used for the DI registry in order to find the instance of the object we want.
 
-declare let toastr: any;
+export let TOASTR_TOKEN = new OpaqueToken('toastr');
 
-@Injectable()
-export class ToastrService {
-    success(message: string, title?:string){
-        toastr.success(message, title);
-    }
-    info(message: string, title?:string){
-        toastr.info(message, title);
-    }
-    warning(message: string, title?:string){
-        toastr.warning(message, title);
-    }
-    error(message: string, title?:string){
-        toastr.error(message, title);
-    }
+export interface Toastr { //for intellisense
+    success(message: string, title?:string):void;
+    info(message: string, title?:string):void;
+    warning(message: string, title?:string):void;
+    error(message: string, title?:string):void;
 }
