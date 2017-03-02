@@ -13,8 +13,10 @@ import {
     EventListResolver,
     CreateSessionComponent,
     SessionListComponent,
-    DurationPipe
-
+    DurationPipe, 
+    UpvoteComponent ,
+    VoterService,
+    LocationValidator
 } from './events/index'
 import { EventsAppComponent } from './events-app.component'
 import { NavBarComponent } from './nav/navbar.component'
@@ -46,7 +48,9 @@ declare let jQuery : Object;
         CollpasibleWellComponent,
         SimpleModalComponent,
         DurationPipe,
-        ModalTriggerDirective
+        ModalTriggerDirective,
+        UpvoteComponent,
+        LocationValidator
     ],
     providers: [
         EventService,
@@ -60,6 +64,7 @@ declare let jQuery : Object;
         },
         EventRouteActivator,
         EventListResolver,
+        VoterService,
         AuthService,
         {
             provide: 'canDeactivateCreateEvent',//this should be an OpaqueToken? no, in this case its ok, we want to use OpaqueToken for things like services that are actually injected into components and other services, but for something like this its ok to use the string.  
