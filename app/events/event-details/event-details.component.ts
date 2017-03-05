@@ -30,9 +30,13 @@ export class EventDetailsComponent{
 
     ngOnInit(){
 
-        this.route.params.forEach((params: Params) => {
-            this.event = this.eventService.getEvent(+params['id']); //we reset this states because now we are routing to the same component (from the popup)
-            this.addMode = false;
+        this.route.data.forEach((data) => {
+
+            this.event = data['event'];
+            this.addMode = false;          
+
+           // this.event = this.eventService.getEvent(+params['id']); //we reset this states because now we are routing to the same component (from the popup)
+            
         });
 
         //this.event = this.eventService.getEvent(+this.route.snapshot.params['id']);
@@ -47,7 +51,7 @@ export class EventDetailsComponent{
 
         session.id = nextId;
         this.event.sessions.push(session);
-        this.eventService.updateEvent(this.event);
+        this.eventService.saveEvent(this.event).subscribe();
         this.addMode = false;
 
     }
